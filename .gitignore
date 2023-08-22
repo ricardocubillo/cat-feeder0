@@ -1,1 +1,10 @@
-
+/feeder-esp32/.pio
+/feeder-esp32/.vscode/.browse.c_cpp.db*
+/feeder-esp32/.vscode/c_cpp_properties.json
+/feeder-esp32/.vscode/launch.json
+/feeder-esp32/.vscode/ipch
+/feeder-esp32/.vscode/extensions.json
+/feeder-esp32/.gitignore
+feeder-esp32/src/firebase-config.cpp
+feeder-esp32/src/wifi-config.cpp
+CatFeederUI/src/firebase.js
