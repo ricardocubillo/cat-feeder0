@@ -1,8 +1,12 @@
 #include <Arduino.h>
+#include <FirebaseESP32.h>
 
 #include "food-container.h"
 
-int get_obj_distance(const int trig_pin, const int echo_pin) {
+FirebaseData hsrc04_value;
+
+int get_obj_distance(const int trig_pin, const int echo_pin)
+{
     long pulse_duration = 0;
     int obj_distance = 0;
 
@@ -17,6 +21,17 @@ int get_obj_distance(const int trig_pin, const int echo_pin) {
     return obj_distance = pulse_duration / 29 / 2;
 }
 
-void send_obj_distance(int obj_distance) {
-    
+void send_obj_distance(int obj_distance)
+{
+    int previous_millis = 0;
+
+    if (Firebase.ready() && (millis() - previous_millis > 1500 || previous_millis == 0))
+    {
+        previous_millis = millis();
+
+        Firebase.setInt(
+            hsrc04_value, 
+            F("/food_container/component/hsrc04/value"), 
+            obj_distance);
+    }
 }
