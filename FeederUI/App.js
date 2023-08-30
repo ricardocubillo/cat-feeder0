@@ -1,13 +1,15 @@
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
+import { PaperProvider } from 'react-native-paper';
 
 import BottomTabNav from "./components/BottomTab";
 
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <BottomTabNav />
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <BottomTabNav />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
