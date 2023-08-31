@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet } from "react-native";
 
+import FoodContainer from "./FoodContainer";
+
 export default function EventScreen() {
   return (
     <View style={styles.events_view}>
-      <Text>Event Screen</Text>
+      <FoodContainer />
     </View>
   );
 }
