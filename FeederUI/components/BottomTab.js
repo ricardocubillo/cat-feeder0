@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import EventScreen from "./EventScreen";
 import HomeScreen from "./HomeScreen";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import SettingsScreen from "./SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,15 @@ export default function BottomTabNav() {
           <MaterialCommunityIcons name="calendar-outline" color={color} size={size} />
         ),
       }} 
+      />
+      <Tab.Screen 
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog-outline" color={color} size={size} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
