@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   card_view: {
     alignSelf: "center",
     marginTop: 10,
-    width: 360,
+    width: 350,
     height: 200
   },
   card_content_position: {
