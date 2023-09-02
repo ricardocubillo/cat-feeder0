@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { PaperProvider } from 'react-native-paper';
 
-import BottomTabNav from "./components/BottomTab";
+import MainView from './components/MainView';
 
 
 export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <BottomTabNav />
+        <MainView />
       </NavigationContainer>
     </PaperProvider>
   );
