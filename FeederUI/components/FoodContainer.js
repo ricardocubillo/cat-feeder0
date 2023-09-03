@@ -7,7 +7,7 @@ export default function FoodContainer() {
     <Card style={styles.card_view}>
       <Card.Title title="Food Container"/>
       <Card.Content style={styles.card_content_position}>
-        <ProgressBar animatedValue={0.5}/>
+        <ProgressBar style={styles.progress_view} animatedValue={0.5}/>
         <Text>Container Quatity: 90%</Text>
       </Card.Content>
     </Card>  
@@ -23,5 +23,8 @@ const styles = StyleSheet.create({
   },
   card_content_position: {
     marginTop: 40
+  },
+  progress_view: {
+    height: 20
   }
 });
