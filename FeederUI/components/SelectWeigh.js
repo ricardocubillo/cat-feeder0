@@ -45,7 +45,7 @@ const ListItem = ({ title, value, checked, setChecked }) => {
 
 export default function SelectWeigh() {
   const [radioChecked, setRadioChecked] = useState(0);
-  console.log(radioChecked);
+  
   return (
     <List.Section>
       <List.Subheader>Select the weigh of your cat</List.Subheader>
