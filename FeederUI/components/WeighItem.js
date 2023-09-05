@@ -6,7 +6,7 @@ export default function WeighItem({ navigation }) {
   return (
     <List.Item 
       title={"Select the weigh cat"}
-      left={(props) => <List.Icon {...props} icon="weight" />} 
+      left={(props) => <MaterialCommunityIcons {...props} name="weight-kilogram" size={24} color="black" />} 
       onPress={() => navigation.navigate("SelectWeigh")}
     />
   );
