@@ -32,10 +32,10 @@ export default function ShowTime() {
 const styles = StyleSheet.create({
   timeView: {
     alignSelf: "center",
-    marginTop: 10
+    marginTop: 20
   },
   timeFont: {
-    fontSize: 70,
+    fontSize: 50,
     fontWeight: "bold"
   }
 })
