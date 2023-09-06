@@ -1,13 +1,13 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
-import WeighItem from "./WeighItem";
+import WeightSection from "./WeightItem";
 import ManualAlimentation from "./ManualAlimentation"
 
 export default function SettingsScreen({ navigation }) {
   return (
     <View>
       <ManualAlimentation />
-      <WeighItem navigation={navigation}/>
+      <WeightSection />
     </View>
   );
 }
