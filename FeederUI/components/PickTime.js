@@ -1,22 +1,13 @@
 import { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { FAB } from "react-native-paper";
 import { TimePickerModal } from "react-native-paper-dates";
 
-import TimeCard from "./TimeCard";
+import TimeCardItem from "./TimeCardItem";
 
 export default function PickTime() {
   const [visible, setVisible] = useState(false);
-  const [time, setTime] = useState({hours: undefined, minutes:undefined});
-
-  let date = new Date();
-  time.hours !== undefined && date.setHours(time.hours);
-	time.minutes !== undefined && date.setMinutes(time.minutes);
-
-  const timeFormatter = new Intl.DateTimeFormat(undefined, {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
+  const [task, setTask] = useState([]);
 
   const onDimiss = () => {
     setVisible(false);
@@ -24,21 +15,60 @@ export default function PickTime() {
 
   const onConfirm = ({ hours, minutes }) => {
     setVisible(false);
-    setTime({hours, minutes});
-  }
+    let newTask = task ?? [];
+    newTask.push({
+      id: task.length + 1,
+      time: { hours, minutes },
+      enable: false,
+    });
+    setTask(newTask);
+  };
+
+  const enableTask = (id) => {
+    let tasks = task.map((item) => {
+      if (item.id === id) {
+        return {
+          id: item.id,
+          time: item.time,
+          enable: !item.enable
+        };
+      }
+      else {
+        return item;
+      }
+    });
+
+    setTask(tasks);
+  };
+
+  const onDelete = (id) => {
+    let copyTask = task.filter((item) => item.id !== id);
+    setTask(copyTask);
+  };
+
 
   return (
-    <View>
+    <View style={styles.container}>
+      <View>
+        {
+          task.length > 0 ? (
+            task.map((item) => (
+              <TimeCardItem
+                key={item.id}
+                task={item}
+                onDelete={() => onDelete(item.id)}
+                enableTask={() => enableTask(item.id)}
+              />
+            ))
+          ) : (
+            <Text>Empty tasks</Text>
+          )}
+      </View>
       <FAB
         style={styles.fabView}
         icon="plus"
         onPress={() => setVisible(true)}
       />
-      {
-        time.hours == undefined && time.minutes == undefined ?
-        <Text style={styles.textView}>Empty task</Text>:
-        <TimeCard time={timeFormatter.format(date)}/>
-      }
       <TimePickerModal
         visible={visible}
         onDimiss={onDimiss}
@@ -50,6 +80,9 @@ export default function PickTime() {
 
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+  },
   textView: {
     flex: 1,
     alignSelf: "center",
@@ -57,7 +90,6 @@ const styles = StyleSheet.create({
   },
   fabView: {
     alignSelf: "center",
-    top: 390,
-    marginBottom: 10
+    top: 200,
   }
 })
