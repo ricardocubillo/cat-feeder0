@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   timeFont: {
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: "bold"
   }
 })
