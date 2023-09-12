@@ -49,26 +49,25 @@ export default function PickTime() {
 
   return (
     <View style={styles.container}>
-      <View>
-        {
-          task.length > 0 ? (
-            task.map((item) => (
-              <TimeCardItem
-                key={item.id}
-                task={item}
-                onDelete={() => onDelete(item.id)}
-                enableTask={() => enableTask(item.id)}
-              />
-            ))
-          ) : (
-            <Text>Empty tasks</Text>
-          )}
+      {
+        task.length > 0 ? (
+          task.map((item) => (
+            <TimeCardItem
+              key={item.id}
+              task={item}
+              onDelete={() => onDelete(item.id)}
+              enableTask={() => enableTask(item.id)}
+            />
+          ))
+        ) : (
+          <Text style={styles.textView}>Empty tasks</Text>
+        )}
+      <View style={styles.fabView}>
+        <FAB
+          icon="plus"
+          onPress={() => setVisible(true)}
+        />
       </View>
-      <FAB
-        style={styles.fabView}
-        icon="plus"
-        onPress={() => setVisible(true)}
-      />
       <TimePickerModal
         visible={visible}
         onDimiss={onDimiss}
@@ -81,15 +80,16 @@ export default function PickTime() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
   textView: {
     flex: 1,
     alignSelf: "center",
-    fontSize: 20
+    fontSize: 20,
   },
   fabView: {
+    flex: 3,
     alignSelf: "center",
-    top: 200,
+    top: 120,
   }
 })
