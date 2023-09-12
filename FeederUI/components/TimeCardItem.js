@@ -1,27 +1,28 @@
 import { StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Text } from "react-native";
-import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
+import { FAB } from "react-native-paper";
+import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 
 import TimeCard from "./TimeCard";
+
 
 export default function TimeCardItem({ task, enableTask, onDelete }) {
   const renderRightActions = () => {
     return (
-      <RectButton style={styles.rectBView} onPress={onDelete}>
-        <Text>
-          {<FontAwesome5
-            name="trash-alt"
-            size={24}
-            color="red" />}
-        </Text>
-      </RectButton>
+      <FAB 
+        style = {styles.fabView}
+        icon={() => <FontAwesome5
+          name="trash"
+          size={24}
+          color="black" />}
+        onPress={onDelete}
+      />
     )
   }
 
   return (
     <GestureHandlerRootView>
-    <Swipeable renderRightActions={renderRightActions} >
+    <Swipeable renderRightActions={renderRightActions} containerStyle={styles.swipeView}>
       <TimeCard task={task} enableTask={enableTask} />
     </Swipeable>
     </GestureHandlerRootView>
@@ -30,6 +31,11 @@ export default function TimeCardItem({ task, enableTask, onDelete }) {
 
 
 const styles = StyleSheet.create({
-  rectBView: {
+  fabView: {
+    alignSelf: "center"
+  },
+  swipeView: {
+    padding: 20,
+    top: 110
   }
 });
