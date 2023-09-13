@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { FAB } from "react-native-paper";
 import { TimePickerModal } from "react-native-paper-dates";
 
@@ -49,30 +49,32 @@ export default function PickTime() {
 
   return (
     <View style={styles.container}>
-      {
-        task.length > 0 ? (
-          task.map((item) => (
-            <TimeCardItem
-              key={item.id}
-              task={item}
-              onDelete={() => onDelete(item.id)}
-              enableTask={() => enableTask(item.id)}
-            />
-          ))
-        ) : (
-          <Text style={styles.textView}>Empty tasks</Text>
-        )}
+      <ScrollView>
+        {
+          task.length > 0 ? (
+            task.map((item) => (
+              <TimeCardItem
+                key={item.id}
+                task={item}
+                onDelete={() => onDelete(item.id)}
+                enableTask={() => enableTask(item.id)}
+              />
+            ))
+          ) : (
+            <Text style={styles.textView}>Empty tasks</Text>
+          )}
+      </ScrollView>
+      <TimePickerModal
+        visible={visible}
+        onDimiss={onDimiss}
+        onConfirm={onConfirm}
+      />
       <View style={styles.fabView}>
         <FAB
           icon="plus"
           onPress={() => setVisible(true)}
         />
       </View>
-      <TimePickerModal
-        visible={visible}
-        onDimiss={onDimiss}
-        onConfirm={onConfirm}
-      />
     </View>
   );
 }
@@ -80,16 +82,15 @@ export default function PickTime() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-around',
   },
   textView: {
-    flex: 1,
     alignSelf: "center",
     fontSize: 20,
+    marginTop: 50
   },
   fabView: {
-    flex: 3,
+    flexBasis: "20%",
     alignSelf: "center",
-    top: 120,
+    top: 220,
   }
 })
