@@ -7,7 +7,7 @@ export default function TimeCard({ task, enableTask }) {
     <Card style={styles.cardView}>
     <Card.Title 
       left={(props) => <Ionicons {...props} name="alarm" size={24} color="black" />}
-      title={`${task.time.hours}:${task.time.minutes}`}
+      title={`${task.time.hours}:${task.time.minutes} ${task.time.meridiem}`}
     />
     <Card.Content style={styles.switchPosition}>
       <Switch value={task.enable} onValueChange={enableTask} />
