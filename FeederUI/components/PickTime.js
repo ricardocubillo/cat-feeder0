@@ -9,18 +9,39 @@ export default function PickTime() {
   const [visible, setVisible] = useState(false);
   const [task, setTask] = useState([]);
 
+  const timeConvert = (hours, minutes) => {
+    let meridiem = hours >= 12 ? "pm" : "am";
+
+    hours = (hours % 12) || 12;
+    const date = {
+      hours: hours,
+      minutes: minutes,
+      meridiem: meridiem
+    };
+
+    return date;
+  }
+
   const onDimiss = () => {
     setVisible(false);
   }
 
   const onConfirm = ({ hours, minutes }) => {
-    setVisible(false);
+    const newDate = timeConvert(hours, minutes)
+
     let newTask = task ?? [];
     newTask.push({
       id: task.length + 1,
-      time: { hours, minutes },
+      time: newDate,
       enable: false,
     });
+
+    if (newTask.length > 2) {
+      newTask.pop();
+      alert("Only two tasks can be inserted");
+    }
+    
+    setVisible(false);
     setTask(newTask);
   };
 
@@ -68,6 +89,7 @@ export default function PickTime() {
         visible={visible}
         onDimiss={onDimiss}
         onConfirm={onConfirm}
+        use24HourClock={false}
       />
       <View style={styles.fabView}>
         <FAB
