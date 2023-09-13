@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   cardView: {
     alignSelf: "center",
     width: 300,
-    height: 100
+    height: 120
   }
 });
