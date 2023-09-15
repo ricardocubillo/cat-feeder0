@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FAB } from "react-native-paper";
 import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
-import { getDatabse, set, ref} from "firebase/database";
+import { getDatabase, set, ref } from "firebase/database";
+import _ from "lodash"
 
 import TimeCard from "./TimeCard";
 import Firebase from "../firebase-configuration";
@@ -11,32 +12,31 @@ import Firebase from "../firebase-configuration";
 
 export default function TimeCardItem({ task, enableTask, onDelete }) {
   const [motor, setMotor] = useState(false);
-  const rdb = getDatabse(Firebase);
-  
-  const refreshTime = () => {
-    let date = new Date();
-    let current_date = date.toLocaleTimeString([], {
+  const rdb = getDatabase(Firebase);
+
+  const checkTime = () => {
+    const date = new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true
     });
 
-    checkTime(current_date);
-  }
-
-  setInterval(() => refreshTime, 1000);
-
-  const checkTime = (time) => {
-    if (enableTask === true) {
-      if (task === time) {
-        setMotor(true);
-      }
+    const splitDate = date.split(/:|[" "]| " " /);
+    const currentDate = {
+      hours: parseInt(splitDate[0]),
+      minutes: parseInt(splitDate[1]),
+      meridiem: splitDate[2]
     }
 
-    set(ref(rdb, "/feeder/component/motor/dc/"), {
-      value: motor
-    });
+    if (task.enable == true && JSON.stringify(task.time) === JSON.stringify(currentDate)) {
+      setMotor(true);
+    }
   }
+  setInterval(checkTime, 1000);
+
+  set(ref(rdb, "/feeder/component/motor/dc/"), {
+    value: motor
+  });
 
   const renderRightActions = () => {
     return (
