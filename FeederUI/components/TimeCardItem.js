@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FAB } from "react-native-paper";
 import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 import { getDatabase, set, ref } from "firebase/database";
-import _ from "lodash"
 
 import TimeCard from "./TimeCard";
 import Firebase from "../firebase-configuration";
