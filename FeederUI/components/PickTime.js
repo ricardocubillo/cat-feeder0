@@ -10,7 +10,7 @@ export default function PickTime() {
   const [task, setTask] = useState([]);
 
   const timeConvert = (hours, minutes) => {
-    let meridiem = hours >= 12 ? "pm" : "am";
+    let meridiem = hours >= 12 ? "PM" : "AM";
 
     hours = (hours % 12) || 12;
     const date = {
