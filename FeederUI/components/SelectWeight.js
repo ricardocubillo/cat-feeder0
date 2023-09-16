@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { FlatList } from "react-native";
 import { List, RadioButton } from "react-native-paper";
+import { getDatabase, ref, set } from "firebase/database";
+
+import Firebase from "../firebase-configuration"
 
 const commons_weigh = [
   {
@@ -44,7 +47,12 @@ const ListItem = ({ title, value, checked, setChecked }) => {
 };
 
 export default function SelectWeight() {
-  const [checked, setChecked] = useState("1");
+  const [weight, setWeight] = useState("1");
+  const rdb = getDatabase(Firebase);
+
+  set(ref(rdb, "/feeder/food-scale/user-sel/component/hx711/"), {
+    value: weight
+  });
 
   return (
     <FlatList
@@ -52,8 +60,8 @@ export default function SelectWeight() {
       renderItem={({ item }) => <ListItem
         title={item.title}
         value={item.value}
-        checked={checked}
-        setChecked={setChecked}
+        checked={weight}
+        setChecked={setWeight}
       />}
       keyExtractor={item => item.id}
     />
