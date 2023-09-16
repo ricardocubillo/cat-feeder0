@@ -33,7 +33,7 @@ export default function TimeCardItem({ task, enableTask, onDelete }) {
   }
   setInterval(checkTime, 1000);
 
-  set(ref(rdb, "/feeder/component/motor/dc/"), {
+  set(ref(rdb, "/feeder/automatic-feeding/component/motor/dc/"), {
     value: motor
   });
 
