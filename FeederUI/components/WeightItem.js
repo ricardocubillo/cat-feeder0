@@ -4,7 +4,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import SelectWeight from "./SelectWeight";
 
-//<MaterialCommunityIcons {...props} name="weight-kilogram" size={24} color="black" />
 export default function WeightItem() {
   return (
     <List.AccordionGroup style={styles.accordionView}>
