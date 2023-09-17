@@ -17,8 +17,17 @@ int get_obj_distance(const int trig_pin, const int echo_pin)
     digitalWrite(trig_pin, LOW);
 
     pulse_duration = pulseIn(echo_pin, HIGH);
+    obj_distance = pulse_duration / 29 / 2;
+    obj_distance = 20 - obj_distance;
 
-    return obj_distance = pulse_duration / 29 / 2;
+    if (obj_distance >= 20) {
+        obj_distance = 0;
+    }
+    else if (obj_distance <= 3) {
+        obj_distance = 20;
+    }
+
+    return map(obj_distance, 0, 20, 0, 100);
 }
 
 void send_obj_distance(int obj_distance)
