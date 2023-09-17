@@ -7,29 +7,24 @@ import Firebase from "../firebase-configuration"
 
 const commons_weigh = [
   {
-    id: 0,
-    title: "1 Kg",
-    value: "1"
-  },
-  {
     id: 1,
     title: "2 Kg",
-    value: "2"
+    value: 2
   },
   {
     id: 2,
     title: "3 Kg",
-    value: "3"
+    value: 3
   },
   {
     id: 3,
     title: "4 kg",
-    value: "4"
+    value: 4
   },
   {
     id: 4,
     title: "5 Kg",
-    value: "5"
+    value: 5
   }
 ];
 
@@ -47,7 +42,7 @@ const ListItem = ({ title, value, checked, setChecked }) => {
 };
 
 export default function SelectWeight() {
-  const [weight, setWeight] = useState("1");
+  const [weight, setWeight] = useState(2);
   const rdb = getDatabase(Firebase);
 
   set(ref(rdb, "/feeder/food-scale/user-sel/component/hx711/"), {
