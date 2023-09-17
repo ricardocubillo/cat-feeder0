@@ -1,16 +1,24 @@
 #include <Arduino.h>
 #include <FirebaseESP32.h>
+#include <addons/TokenHelper.h>
+#include <addons/RTDBHelper.h>
 
 #include "firebase-rdb.h"
 
-#define API_KEY ""
-#define RDB_URL ""
+#define API_KEY  ""
+#define RDB_URL  ""
 
 FirebaseData rdb;
+FirebaseConfig config;
+FirebaseAuth auth;
 
 void setup_rdb() {
-    Firebase.begin(RDB_URL, API_KEY);
-    Firebase.reconnectWiFi(true);
+    config.api_key = API_KEY;
+    config.database_url = RDB_URL;
+    config.signer.test_mode = true;
 
-    rdb.setResponseSize(8192);
+    rdb.setBSSLBufferSize(4096, 1024);
+
+    Firebase.begin(&config, &auth);
+    Firebase.reconnectWiFi(true);
 }
