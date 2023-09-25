@@ -56,7 +56,7 @@ void turn_on_motor(const int pin_motor[3], int pwm_speed) {
     digitalWrite(pin_motor[2], HIGH);
     
     analogWrite(pin_motor[0], pwm_speed);
-    send_motor_state(true);
+    send_motor_state(false);
 }
 
 void turn_off_motor(const int pin_motor[3]) {
@@ -65,5 +65,5 @@ void turn_off_motor(const int pin_motor[3]) {
     delay(100);
 
     analogWrite(pin_motor[0], 0);
-    send_motor_state(false);
+    send_motor_state(true);
 }
