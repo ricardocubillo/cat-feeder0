@@ -9,7 +9,7 @@ export default function FoodContainer() {
   const [containerValue, setContainerValue] = useState(0);
 
   const rdb = getDatabase(Firebase);
-  const getRef = ref(rdb, "/food_container/component/hsrc04/value");
+  const getRef = ref(rdb, "/food_container/hsrc04/value");
 
   
   useEffect(() => {

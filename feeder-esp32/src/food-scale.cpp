@@ -29,7 +29,7 @@ int user_sel_weight()
         previous_millis = millis();
         Firebase.getInt(
             option_weight,
-            F("/feeder/food-scale/user-sel/component/hx711/value"),
+            F("/food-scale/user-sel/hx711/value"),
             &selected_weight);
     }
 
@@ -71,7 +71,7 @@ void send_food_weight(int weight)
         previous_millis = millis();
         Firebase.setInt(
             food_weight,
-            F("/feeder/food-scale/read/component/hx711/value"),
+            F("/food-scale/read/hx711/value"),
             weight);
     }
 }

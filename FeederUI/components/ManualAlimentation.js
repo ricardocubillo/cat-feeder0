@@ -7,12 +7,12 @@ import Firebase from "../firebase-configuration";
 
 export default function ManualAlimentation() {
   const [motor, setMotor] = useState(false);
-  const rdb = getDatabase(Firebase);
+  const manual_f_instance = getDatabase(Firebase);
 
   const manualFeedingState = getDatabase(Firebase);
   const getManualState = ref(
     manualFeedingState,
-    "/feeder/feeding-state/component/motor/dc/value"
+    "/feeding-state/motor/value"
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ManualAlimentation() {
   const onMotor = () => {
     setMotor(prevState => !prevState);
   }
-  set(ref(rdb, "/feeder/manual-feeding/component/motor/dc/"), {
+  set(ref(manual_f_instance, "/manual-feeding/motor/"), {
     value: motor
   });
 

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FAB } from "react-native-paper";
 import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
-import { getDatabase, set, ref } from "firebase/database";
+import { getDatabase, set, ref, onValue } from "firebase/database";
 
 import TimeCard from "./TimeCard";
 import Firebase from "../firebase-configuration";
@@ -11,7 +11,8 @@ import Firebase from "../firebase-configuration";
 
 export default function TimeCardItem({ task, enableTask, onDelete }) {
   const [motor, setMotor] = useState(false);
-  const rdb = getDatabase(Firebase);
+  const automaticFInstance = getDatabase(Firebase);
+  const automaticStateDB = getDatabase(Firebase);
 
   const checkTime = () => {
     const date = new Date().toLocaleTimeString([], {
@@ -29,13 +30,28 @@ export default function TimeCardItem({ task, enableTask, onDelete }) {
 
     if (task.enable == true && JSON.stringify(task.time) === JSON.stringify(currentDate)) {
       setMotor(true);
+    } 
+    else {
+      setMotor(false);
     }
   }
   setInterval(checkTime, 1000);
 
-  set(ref(rdb, "/feeder/automatic-feeding/component/motor/dc/"), {
+  set(ref(automaticFInstance, "/automatic-feeding/motor/"), {
     value: motor
   });
+
+  const getAutomaticState = ref(automaticStateDB, "/feeding-state/motor/value");
+
+  useEffect(() => {
+    onValue(getAutomaticState, (snapshot) => {
+      const motorState = snapshot.val();
+
+      if (motorState == true) {
+        setMotor(false);
+      }
+    });
+  })
 
   const renderRightActions = () => {
     return (

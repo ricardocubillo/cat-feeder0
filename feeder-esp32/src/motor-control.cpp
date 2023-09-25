@@ -13,7 +13,7 @@ bool alarm() {
         prev_millis = millis();
         Firebase.getBool(
             automatic_feeding, 
-            F("/feeder/automatic-feeding/component/motor/dc/value"),
+            F("/automatic-feeding/motor/value"),
             &alarm_state);
     }
 
@@ -28,7 +28,7 @@ bool manual() {
         prev_millis = millis();
         Firebase.getBool(
             manual_feeding, 
-            F("/feeder/manual-feeding/component/motor/dc/value"),
+            F("/manual-feeding/motor/value"),
             &manual_feeding_state);
     }
 
@@ -42,7 +42,7 @@ void send_motor_state(bool state) {
         prev_millis = millis();
         Firebase.setBool(
             motor_state,
-            F("/feeder/feeding-state/component/motor/dc/value"),
+            F("/feeding-state/motor/value"),
             state
         );
     }

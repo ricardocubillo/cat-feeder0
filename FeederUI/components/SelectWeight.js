@@ -45,7 +45,7 @@ export default function SelectWeight() {
   const [weight, setWeight] = useState(2);
   const rdb = getDatabase(Firebase);
 
-  set(ref(rdb, "/feeder/food-scale/user-sel/component/hx711/"), {
+  set(ref(rdb, "/food-scale/user-sel/hx711/"), {
     value: weight
   });
 

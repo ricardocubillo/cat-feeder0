@@ -40,7 +40,7 @@ void send_obj_distance(int obj_distance)
 
         Firebase.setInt(
             hsrc04_value, 
-            F("/food_container/component/hsrc04/value"), 
+            F("/food_container/hsrc04/value"), 
             obj_distance);
     }
 }
