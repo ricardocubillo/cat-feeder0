@@ -51,7 +51,7 @@ int user_sel_weight()
         break;
     }
 
-    return selected_weight;
+    return weight;
 }
 
 int read_food_scale()
