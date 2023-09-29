@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import SelectWeight from "./SelectWeight";
 
-export default function WeightItem() {
-  return (
-    <List.AccordionGroup style={styles.accordionView}>
+/* 
+<List.AccordionGroup style={styles.accordionView}>
       <List.Accordion
         title={"Cat's weight"}
         id={"1"}
@@ -18,6 +18,20 @@ export default function WeightItem() {
         <SelectWeight />
       </List.Accordion>
     </List.AccordionGroup>
+*/
+
+export default function WeightItem() {
+  return (
+    <List.Section>
+      <List.Item
+        title={"Cat's weight"}
+        left={(props) => <MaterialCommunityIcons {...props}
+          name="weight-kilogram"
+          size={24}
+          color="black" />}
+      />
+      <SelectWeight />
+    </List.Section>
   );
 }
 
