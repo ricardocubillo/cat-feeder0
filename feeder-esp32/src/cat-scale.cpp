@@ -28,7 +28,7 @@ int read_cat_scale() {
     return read_weight;
 }
 
-void send_food_weight(int weight) {
+void send_cat_weight(int weight) {
     int prev_millis = 0;
 
     if (Firebase.ready() && (millis() - prev_millis > 1500 || prev_millis == 0)) {
