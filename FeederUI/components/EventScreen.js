@@ -1,11 +1,19 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 
 import FoodContainer from "./FoodContainer";
+import WeightScale from "./WeightScale";
+import WaterContainer from "./WaterContainer";
+import FeedingCounter from "./FeedingCounter";
 
 export default function EventScreen() {
   return (
     <View style={styles.events_view}>
-      <FoodContainer />
+      <ScrollView>
+        <FoodContainer />
+        <WaterContainer />
+        <WeightScale />
+        <FeedingCounter />
+      </ScrollView>
     </View>
   );
 }
