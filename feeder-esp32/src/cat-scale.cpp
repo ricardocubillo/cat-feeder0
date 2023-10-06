@@ -18,10 +18,9 @@ void init_cat_scale(const int dt, const int sck) {
 
 int read_cat_scale() {
     int read_weight = 0;
-    read_weight = (int)cat_scale.get_units(10);
-    read_weight = -read_weight;
+    read_weight = (int)cat_scale.get_units(5);
 
-    if (read_weight < 0 ) {
+    if (read_weight < 50) {
         read_weight = 0;
     }
 
