@@ -3,7 +3,7 @@
 
 #include "food-container.h"
 
-FirebaseData hsrc04_value;
+FirebaseData food_container;
 
 int get_obj_distance(const int trig_pin, const int echo_pin)
 {
@@ -24,7 +24,7 @@ int get_obj_distance(const int trig_pin, const int echo_pin)
         obj_distance = 0;
     }
     else if (obj_distance <= 3) {
-        obj_distance = 20;
+        obj_distance = 100;
     }
 
     return map(obj_distance, 0, 20, 0, 100);
@@ -39,7 +39,7 @@ void send_obj_distance(int obj_distance)
         previous_millis = millis();
 
         Firebase.setInt(
-            hsrc04_value, 
+            food_container, 
             F("/food_container/hsrc04/value"), 
             obj_distance);
     }
