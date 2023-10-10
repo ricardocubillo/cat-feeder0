@@ -9,7 +9,7 @@ export default function FeedingCounter() {
   const [feedingCounter, setFeedingCounter] = useState(0);
 
   const feedingCounterRDB = getDatabase(Firebase);
-  const feedingCounterRef = ref(feedingCounterRDB, "feeding-counter/read/value");
+  const feedingCounterRef = ref(feedingCounterRDB, "/feeding-counter/read/hx711/value");
 
   useEffect(() => {
     onValue(feedingCounterRef, (snapshot) => {
