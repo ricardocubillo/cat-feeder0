@@ -24,7 +24,8 @@ int read_cat_scale() {
         read_weight = 0;
     }
 
-    return read_weight;
+    // Returns the weights in Kg
+    return read_weight / 1000;
 }
 
 void send_cat_weight(int weight) {
