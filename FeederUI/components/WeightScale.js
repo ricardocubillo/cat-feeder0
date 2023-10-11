@@ -27,7 +27,7 @@ export default function WeightScale() {
       <Card.Title title="Cat's weight" />
       <Card.Content style={styles.cardContent}>
         <Text style={styles.textView}>
-          {prevWeight == undefined ? "0": prevWeight}g
+          {prevWeight == undefined ? "0": prevWeight} Kg
         </Text>
       </Card.Content>
     </Card>
