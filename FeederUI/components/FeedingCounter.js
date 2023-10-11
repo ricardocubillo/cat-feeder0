@@ -4,25 +4,39 @@ import { Card } from "react-native-paper";
 import { getDatabase, onValue, ref } from "firebase/database";
 
 import Firebase from "../firebase-configuration";
+import usePreviousValue from "../previousValue";
 
 export default function FeedingCounter() {
-  const [feedingCounter, setFeedingCounter] = useState(0);
+  const [weightScale, setWeightScale] = useState(0);
+  const [count, setCount] = useState(0);
+  const prevWeight = usePreviousValue(weightScale);
 
-  const feedingCounterRDB = getDatabase(Firebase);
-  const feedingCounterRef = ref(feedingCounterRDB, "/feeding-counter/read/hx711/value");
+  const feedingCountRDB = getDatabase(Firebase);
+  const feedingCountRef = ref(feedingCountRDB, "/cat-scale/read/hx711/value");
 
   useEffect(() => {
-    onValue(feedingCounterRef, (snapshot) => {
-      const getFeedingCounterValue = snapshot.val();
-      setFeedingCounter(getFeedingCounterValue);
+    onValue(feedingCountRef, (snapshot) => {
+      const getValue = snapshot.val();
+      setWeightScale(getValue);
     });
   }, []);
+
+
+  useEffect(() => {
+    if (weightScale != 0 &&
+      prevWeight != weightScale &&
+      prevWeight != undefined
+    ) 
+    {
+      setCount(count + 1);
+    }
+  })
 
   return (
     <Card style={styles.cardView}>
       <Card.Title title="Feeding counter" />
       <Card.Content style={styles.cardContent}>
-        <Text style={styles.textView}>{feedingCounter}</Text>
+        <Text style={styles.textView}>{count}</Text>
       </Card.Content>
     </Card>
   );
