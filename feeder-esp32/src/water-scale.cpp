@@ -17,10 +17,13 @@ void init_water_scale(const int dt, const int sck) {
 
 int read_water_scale() {
     int read_weight = 0;
-    read_weight = (int) water_scale.get_units(10);
-    water_scale.power_down();
-    delay(500);
-    water_scale.power_up();
+
+    if (water_scale.wait_ready_timeout(1000)) {
+        read_weight = (int) water_scale.get_units(10);
+        water_scale.power_down();
+        delay(500);
+        water_scale.power_up();
+    }
 
     return read_weight;
 }
