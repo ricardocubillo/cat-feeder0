@@ -57,7 +57,12 @@ int user_sel_weight()
 int read_food_scale()
 {
     int read_weight = 0;
-    read_weight = (int)food_scale.get_units(10);
+    if (food_scale.wait_ready_timeout(1000)) {
+        read_weight = (int)food_scale.get_units(10);
+        food_scale.power_down();
+        delay(500);
+        food_scale.power_up();
+    }
 
     return read_weight;
 }
