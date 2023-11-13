@@ -6,7 +6,6 @@
 HX711 cat_scale;
 FirebaseData cat_weight;
 
-const float OFFSET = 50682624;
 
 void init_cat_scale(const int dt, const int sck)
 {
@@ -14,7 +13,6 @@ void init_cat_scale(const int dt, const int sck)
 
     cat_scale.begin(dt, sck);
     cat_scale.set_scale(calibration_factor);
-    cat_scale.set_offset(OFFSET);
     cat_scale.tare();
 }
 
