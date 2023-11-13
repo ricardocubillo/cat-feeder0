@@ -10,12 +10,12 @@
 const int HSRC04_TRIG = 18;
 const int HSRC04_ECHO = 19;
 const int ENA = 27;
-const int IN1 = 32;
-const int IN2 = 33;
+const int IN1 = 25;
+const int IN2 = 26;
 const int HX711_DT = 16;
 const int HX711_SCK = 4;
-const int HX711_DT_CAT = 26;
-const int HX711_SCK_CAT = 25;
+const int HX711_DT_CAT = 33;
+const int HX711_SCK_CAT = 32;
 const int MOTOR_PINS [3] = {ENA, IN1, IN2};
 
 int obj_distance = 0;
@@ -52,9 +52,8 @@ void loop() {
   send_food_weight(food_scale_weight);
   selected_cat_weight = user_sel_weight();
 
-  cat_scale_weight = read_cat_scale();
+  cat_scale_weight = read_cat_weight();
   send_cat_weight(cat_scale_weight);
-  Serial.println(cat_scale_weight);
 
   alarm_state = alarm();
   manual_state = manual();
